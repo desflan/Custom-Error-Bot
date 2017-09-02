@@ -9,6 +9,7 @@ using System.Web;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Internals.Fibers;
+using Microsoft.Bot.Connector;
 
 namespace CustomErrorBot.Dialogs
 {
@@ -27,11 +28,11 @@ namespace CustomErrorBot.Dialogs
             SetField.NotNull(out this.trace, nameof(trace), trace);
         }
 
-        async Task IPostToBot.PostAsync<T>(T item, CancellationToken token)
+        public async Task PostAsync(IActivity activity, CancellationToken token)
         {
             try
             {
-                await inner.PostAsync(item, token);
+                await inner.PostAsync(activity, token);
             }
             catch (Exception)
             {

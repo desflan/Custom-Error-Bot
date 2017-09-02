@@ -14,11 +14,11 @@ namespace CustomErrorBot.Dialogs
         }
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
-            throw new Exception("Exception Occurred");
-            
-            //var message = await argument;
-            //await context.PostAsync("You said: " + message.Text);
-            //context.Wait(MessageReceivedAsync);
+            // throw new Exception("Exception Occurred");
+
+            var message = await argument;
+            await context.PostAsync("You said: " + message.Text);
+            context.Wait(MessageReceivedAsync);
         }
     }
 }
