@@ -14,9 +14,11 @@ namespace CustomErrorBot
     {
         protected void Application_Start()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule(new DefaultExceptionMessageOverrideModule());
-            builder.Update(Conversation.Container);
+            Conversation.UpdateContainer(
+                builder =>
+                {
+                    builder.RegisterModule(new DefaultExceptionMessageOverrideModule());
+                });
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
